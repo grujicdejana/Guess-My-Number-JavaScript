@@ -5,6 +5,9 @@ document.querySelector('.number').value = secretNumber;
 
 let score = 20;
 
+const highScores = [];
+let max;
+
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   //console.log(guess);
@@ -23,7 +26,24 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent =
       '🎉 Correct Number! YOU WIN';
     const score = document.querySelector('.score').textContent;
-    document.querySelector('.highscore').textContent = score;
+
+    //calculate highscore
+    const currentHighscore = score;
+    highScores.push(currentHighscore);
+    max = highScores[0];
+    console.log(highScores);
+
+    if (highScores.length === 1) {
+      document.querySelector('.highscore').textContent = max;
+    } else {
+      for (let i = 1; i < highScores.length; i++) {
+        if (max < highScores[i]) {
+          max = highScores[i];
+        }
+      }
+
+      document.querySelector('.highscore').textContent = max;
+    }
 
     document.querySelector('.number').textContent = secretNumber;
     //change style when player wins.
@@ -58,7 +78,7 @@ document.querySelector('.again').addEventListener('click', function () {
 
   document.querySelector('.message').textContent = 'Start guessing...';
   document.querySelector('.score').textContent = score;
-  document.querySelector('.highscore').textContent = 0;
+  document.querySelector('.highscore').textContent = max;
 
   document.querySelector('.guess').value = '';
 
