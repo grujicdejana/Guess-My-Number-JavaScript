@@ -44,7 +44,9 @@ document.querySelector('.check').addEventListener('click', function () {
     const currentHighscore = score;
     highScores.push(currentHighscore);
 
-    printer('.highscore', findMaxHighscore(highScores));
+    document.querySelector('.highscore').textContent = findMaxHighscore(
+      highScores
+    );
 
     printer('.number', secretNumber);
 
